@@ -12,8 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.xml.bind.CycleRecoverable;
+
 @Entity
-public class Produto implements Serializable{
+public class Produto implements Serializable, CycleRecoverable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -21,7 +24,9 @@ public class Produto implements Serializable{
 	private Integer id;
 	private String nome;
 	private double preco;
-	@ManyToMany      
+
+	@ManyToMany()     
+	@JsonIgnoreProperties("produtos")
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
 		joinColumns = @JoinColumn(name = "produto_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id"))
@@ -90,7 +95,12 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-
+	
+	@Override
+	public Object onCycleDetected(Context context) {
+		Produto obj = new Produto(this.id, this.nome, this.preco);
+		return obj;
+	}
 	
 	
 }

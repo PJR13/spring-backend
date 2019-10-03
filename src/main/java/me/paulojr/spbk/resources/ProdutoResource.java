@@ -10,28 +10,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.paulojr.spbk.model.Categoria;
-import me.paulojr.spbk.services.CategoriaService;
+import me.paulojr.spbk.model.Produto;
+import me.paulojr.spbk.services.ProdutoService;
 
 @RestController
-@RequestMapping(value = "/categorias")
-public class CategoriaResource {
-	
+@RequestMapping(value = "/produtos")
+public class ProdutoResource {
+
 	@Autowired
-	private CategoriaService service;
-	
+	private ProdutoService service;
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> find(@PathVariable int id){
-		Categoria cat = service.buscar(id);
-		return new ResponseEntity<Categoria>(cat, HttpStatus.OK);
-		
+	public ResponseEntity<Produto> find(@PathVariable int id) {
+		Produto prod = service.buscar(id);
+		return new ResponseEntity<Produto>(prod, HttpStatus.OK);
 	}
 
 	@GetMapping()
-	public ResponseEntity<List<Categoria>> listar(){
-		if(service.listar().size() == 0) {
+	public ResponseEntity<List<Produto>> listar() {
+		if (service.listar().size() == 0) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<List<Categoria>>(service.listar(), HttpStatus.OK);
+		return new ResponseEntity<List<Produto>>(service.listar(), HttpStatus.OK);
 	}
+
 }

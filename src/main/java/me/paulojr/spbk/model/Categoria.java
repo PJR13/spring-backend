@@ -10,14 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.xml.bind.CycleRecoverable;
+
+
 @Entity
-public class Categoria implements Serializable {
+public class Categoria implements Serializable, CycleRecoverable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	@ManyToMany(mappedBy = "categorias")
+	@JsonIgnoreProperties("categorias")
 	private List<Produto> produtos = new ArrayList<>();
 
 	public Categoria() {
@@ -72,6 +77,12 @@ public class Categoria implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Object onCycleDetected(Context context) {
+		Categoria obj = new Categoria(this.id, this.nome);
+		return obj;
 	}
 
 }
