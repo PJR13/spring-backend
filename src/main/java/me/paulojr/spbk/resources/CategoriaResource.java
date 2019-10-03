@@ -1,6 +1,5 @@
 package me.paulojr.spbk.resources;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +34,9 @@ public class CategoriaResource {
 
 	@GetMapping()
 	public ResponseEntity<List<Categoria>> listar(){
-		Categoria catg = new Categoria(1, "teste");
-		
-		return new ResponseEntity<List<Categoria>>(Arrays.asList(catg), HttpStatus.OK);
-		
+		if(service.listar().size() == 0) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Categoria>>(service.listar(), HttpStatus.OK);
 	}
 }
