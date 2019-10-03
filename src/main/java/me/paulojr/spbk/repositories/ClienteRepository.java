@@ -3,9 +3,9 @@ package me.paulojr.spbk.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import me.paulojr.spbk.domain.Estado;
+import me.paulojr.spbk.domain.Cliente;
 
 @Repository
-public interface EstadoRepository extends JpaRepository<Estado, Integer> {
+public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
 }

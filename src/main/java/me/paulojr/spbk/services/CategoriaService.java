@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.paulojr.spbk.model.Categoria;
+import me.paulojr.spbk.domain.Categoria;
 import me.paulojr.spbk.repositories.CategoriaRepository;
 import me.paulojr.spbk.services.exceptions.ObjectNotFoundException;
 

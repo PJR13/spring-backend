@@ -1,4 +1,4 @@
-package me.paulojr.spbk.model;
+package me.paulojr.spbk.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;

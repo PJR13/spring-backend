@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.paulojr.spbk.model.Categoria;
+import me.paulojr.spbk.domain.Categoria;
 import me.paulojr.spbk.services.CategoriaService;
 
 @RestController
