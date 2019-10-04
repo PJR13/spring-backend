@@ -1,5 +1,6 @@
 package me.paulojr.spbk;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,20 @@ import me.paulojr.spbk.domain.Cidade;
 import me.paulojr.spbk.domain.Cliente;
 import me.paulojr.spbk.domain.Endereco;
 import me.paulojr.spbk.domain.Estado;
+import me.paulojr.spbk.domain.Pagamento;
+import me.paulojr.spbk.domain.PagamentoComBoleto;
+import me.paulojr.spbk.domain.PagamentoComCartao;
+import me.paulojr.spbk.domain.Pedido;
 import me.paulojr.spbk.domain.Produto;
+import me.paulojr.spbk.domain.enums.EstadoPagamento;
 import me.paulojr.spbk.domain.enums.TipoCliente;
 import me.paulojr.spbk.repositories.CategoriaRepository;
 import me.paulojr.spbk.repositories.CidadeRepository;
 import me.paulojr.spbk.repositories.ClienteRepository;
 import me.paulojr.spbk.repositories.EnderecoRepository;
 import me.paulojr.spbk.repositories.EstadoRepository;
+import me.paulojr.spbk.repositories.PagamentoRepository;
+import me.paulojr.spbk.repositories.PedidoRepository;
 import me.paulojr.spbk.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -40,6 +48,10 @@ public class SpringBackendApplication implements CommandLineRunner {
 	private ClienteRepository clirepo;
 	@Autowired
 	private EnderecoRepository endrepo;
+	@Autowired
+	private PedidoRepository pedrepo;
+	@Autowired
+	private PagamentoRepository pagrepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -59,6 +71,8 @@ public class SpringBackendApplication implements CommandLineRunner {
 		Endereco end2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
 		Endereco end3 = new Endereco(null, "Rua Exemplo", "41", "Apto 14", "Centro", "32146597", cli2, c2);
 		Endereco end4 = new Endereco(null, "Avenida 01", "72", "Sala 551", "Centro", "45678912", cli2, c3);
+
+
 		cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 		cli2.getTelefones().addAll(Arrays.asList("87452136", "96875421"));
 		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));
@@ -70,6 +84,7 @@ public class SpringBackendApplication implements CommandLineRunner {
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
+		
 		crepo.saveAll(Arrays.asList(cat1, cat2));
 		prepo.saveAll(Arrays.asList(p1, p2, p3));
 		erepo.saveAll(Arrays.asList(e1, e2));
@@ -77,6 +92,53 @@ public class SpringBackendApplication implements CommandLineRunner {
 		clirepo.saveAll(Arrays.asList(cli1, cli2));
 		endrepo.saveAll(Arrays.asList(end1, end2, end3, end4));
 
+
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm"); 
+		 
+		/*
+		 * Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, end1);
+		 * Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, end2);
+		 * cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		 * 
+		 * Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO,
+		 * ped1, 6); ped1.setPagamento(pagto1); Pagamento pagto2 = new
+		 * PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2,
+		 * sdf.parse("20/10/2017 00:00"), null); ped2.setPagamento(pagto2);
+		 * 
+		 * pedrepo.saveAll(Arrays.asList(ped1, ped2));
+		 * pagrepo.saveAll(Arrays.asList(pagto1, pagto2));
+		 */
+		
+		
+		
+		
+		
+
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, end1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, end2);
+		Pedido ped3 = new Pedido(null, sdf.parse("09/08/2017 11:24"), cli2, end3);
+		Pedido ped4 = new Pedido(null, sdf.parse("25/11/2017 13:42"), cli2, end4);
+		
+		
+	
+		Pagamento pag1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
+		Pagamento pag3 = new PagamentoComCartao(null, EstadoPagamento.PENDENTE, ped3, 2);
+		Pagamento pag4 = new PagamentoComBoleto(null, EstadoPagamento.CANCELADO, ped4, sdf.parse("23/11/2017 00:00"), null);
+		
+		ped1.setPagamento(pag1);
+		ped2.setPagamento(pag2);
+		ped3.setPagamento(pag3);
+		ped4.setPagamento(pag4);
+		
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		cli2.getPedidos().addAll(Arrays.asList(ped3, ped4));
+		
+
+		pedrepo.saveAll(Arrays.asList(ped1, ped2, ped3, ped4));
+		pagrepo.saveAll(Arrays.asList(pag1, pag2, pag3, pag4));
 	}
 
 }
