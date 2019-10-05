@@ -24,14 +24,11 @@ public class ClienteResource {
 	public ResponseEntity<?> find(@PathVariable int id){
 		Cliente cli = service.buscar(id);
 		return new ResponseEntity<Cliente>(cli, HttpStatus.OK);
-		
 	}
 
 	@GetMapping()
 	public ResponseEntity<List<Cliente>> listar(){
-		if(service.listar().size() == 0) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		if(service.listar().size() == 0) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		return new ResponseEntity<List<Cliente>>(service.listar(), HttpStatus.OK);
 	}
 }
