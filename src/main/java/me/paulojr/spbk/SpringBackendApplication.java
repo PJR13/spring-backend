@@ -75,7 +75,7 @@ public class SpringBackendApplication implements CommandLineRunner {
 		Cidade c2 = new Cidade(null, "São Paulo", e2);
 		Cidade c3 = new Cidade(null, "Campinas", e2);
 		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
-		Cliente cli2 = new Cliente(null, "Tabajara Empreendimentos LDTA", "contato@tabajara.com", "04546220000176",
+		Cliente cli2 = new Cliente(null, "Tabajara Empreendimentos LTDA", "contato@tabajara.com", "04546220000176",
 				TipoCliente.PESSOAJURIDICA);
 		Endereco end1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
 		Endereco end2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);

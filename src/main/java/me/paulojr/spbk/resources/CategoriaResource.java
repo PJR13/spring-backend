@@ -35,8 +35,8 @@ public class CategoriaResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> find(@PathVariable int id) {
-		Categoria cat = service.buscar(id);
-		return new ResponseEntity<>(cat, HttpStatus.OK);
+		Categoria obj = service.buscar(id);
+		return new ResponseEntity<>(obj, HttpStatus.OK);
 
 	}
 
@@ -60,14 +60,14 @@ public class CategoriaResource {
 	@PatchMapping(value = "/{id}")
 	public ResponseEntity<?> putCatg(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
 		objDto.setId(id);
-		Categoria obj = service.update(service.fromDTO(objDto));
+		service.update(service.fromDTO(objDto));
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> patchCatg(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
 		objDto.setId(id);
-		Categoria obj = service.update(service.fromDTO(objDto));
+		service.update(service.fromDTO(objDto));
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
