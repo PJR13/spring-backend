@@ -61,6 +61,11 @@ public class SpringBackendApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Categoria cat1 = new Categoria(null, "Informática");
 		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria cat3 = new Categoria(null, "Cama mesa e banho");
+		Categoria cat4 = new Categoria(null, "Eletrônicos");
+		Categoria cat5 = new Categoria(null, "Jardinagem");
+		Categoria cat6 = new Categoria(null, "Decoração");
+		Categoria cat7 = new Categoria(null, "Perfumaria");
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
@@ -89,7 +94,7 @@ public class SpringBackendApplication implements CommandLineRunner {
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		p3.getCategorias().addAll(Arrays.asList(cat1));
 
-		crepo.saveAll(Arrays.asList(cat1, cat2));
+		crepo.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		prepo.saveAll(Arrays.asList(p1, p2, p3));
 		erepo.saveAll(Arrays.asList(e1, e2));
 		cdrepo.saveAll(Arrays.asList(c1, c2, c3));
@@ -97,20 +102,6 @@ public class SpringBackendApplication implements CommandLineRunner {
 		endrepo.saveAll(Arrays.asList(end1, end2, end3, end4));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-		/*
-		 * Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, end1);
-		 * Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, end2);
-		 * cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
-		 * 
-		 * Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO,
-		 * ped1, 6); ped1.setPagamento(pagto1); Pagamento pagto2 = new
-		 * PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2,
-		 * sdf.parse("20/10/2017 00:00"), null); ped2.setPagamento(pagto2);
-		 * 
-		 * pedrepo.saveAll(Arrays.asList(ped1, ped2));
-		 * pagrepo.saveAll(Arrays.asList(pagto1, pagto2));
-		 */
 
 		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, end1);
 		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cli1, end2);
