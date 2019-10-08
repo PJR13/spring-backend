@@ -38,8 +38,8 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		buscar(obj.getId());
-		return repo.save(obj);
+		Categoria newObj = buscar(obj.getId());
+		return repo.save(updateData(newObj, obj));
 	}
 
 	public Page<Categoria> findPage(Integer i, Integer lines, String orderBy, String direction) {
@@ -62,8 +62,14 @@ public class CategoriaService {
 		}
 
 	}
+
 	public Categoria fromDTO(CategoriaDTO dto) {
 		return new Categoria(dto.getId(), dto.getNome());
+	}
+
+	private Categoria updateData(Categoria newObj, Categoria obj) {
+		newObj.setNome(obj.getNome());
+		return newObj;
 	}
 
 }
