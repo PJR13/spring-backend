@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import me.paulojr.spbk.domain.Categoria;
+import me.paulojr.spbk.dto.CategoriaDTO;
 import me.paulojr.spbk.repositories.CategoriaRepository;
 import me.paulojr.spbk.services.exceptions.DataIntegrityException;
 import me.paulojr.spbk.services.exceptions.IllegalDirectionValueException;
@@ -60,6 +61,9 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possível deletar uma categoria que possui um produto.");
 		}
 
+	}
+	public Categoria fromDTO(CategoriaDTO dto) {
+		return new Categoria(dto.getId(), dto.getNome());
 	}
 
 }

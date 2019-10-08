@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -49,24 +51,23 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<?> postCatg(@RequestBody Categoria obj) {
-		obj = service.insert(obj);
+	public ResponseEntity<?> postCatg(@Valid @RequestBody CategoriaDTO objDto) {
+		Categoria obj = service.insert(service.fromDTO(objDto));
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-
 	}
 
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<?> putCatg(@RequestBody Categoria obj, @PathVariable Integer id) {
-		obj.setId(id);
-		obj = service.update(obj);
+	public ResponseEntity<?> putCatg(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
+		objDto.setId(id);
+		Categoria obj = service.update(service.fromDTO(objDto));
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> patchCatg(@RequestBody Categoria obj, @PathVariable Integer id) {
-		obj.setId(id);
-		obj = service.update(obj);
+	public ResponseEntity<?> patchCatg(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
+		objDto.setId(id);
+		Categoria obj = service.update(service.fromDTO(objDto));
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
