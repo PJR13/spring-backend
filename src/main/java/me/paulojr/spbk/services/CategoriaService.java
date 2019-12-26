@@ -60,7 +60,6 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível deletar uma categoria que possui um produto.");
 		}
-
 	}
 
 	public Categoria fromDTO(CategoriaDTO dto) {
