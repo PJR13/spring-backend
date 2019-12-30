@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import me.paulojr.spbk.domain.Produto;
@@ -15,6 +16,10 @@ public class ProdutoService {
 
 	@Autowired
 	private ProdutoRepository repo;
+
+	public Page<Produto> search(String name, List<Integer> ids){
+
+	}
 
 	public Produto buscar(int i) {
 		Optional<Produto> prod = repo.findById(i);
