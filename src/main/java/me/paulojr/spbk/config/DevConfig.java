@@ -1,6 +1,8 @@
 package me.paulojr.spbk.config;
 
 import me.paulojr.spbk.services.DbService;
+import me.paulojr.spbk.services.EmailService;
+import me.paulojr.spbk.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,11 @@ public class DevConfig {
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String strategy;
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
+    }
 
     @Bean
     public boolean initDatabase() throws ParseException {
